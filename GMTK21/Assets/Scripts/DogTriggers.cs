@@ -1,9 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DogTriggers : MonoBehaviour
 {
+    //timer variables
+    public float levelTimeSec = 500f;
+    private float timeRemaining;
+    public GameObject panel;
+    private RectTransform mercury;
+
+    private void Start()
+    {
+        timeRemaining = levelTimeSec;
+        mercury = (RectTransform) panel.transform.GetChild(0);
+    }
+
     private void OnTriggerEnter2D(Collider2D collider) {
         if(collider.CompareTag("Goal")) {
             //Level complete!
@@ -13,5 +26,14 @@ public class DogTriggers : MonoBehaviour
             collider.GetComponent<Neighbor>().beginPettingDog();
             //Alert the dog that it is being pet!
         }
+    }
+
+    private void Update()
+    {
+
+        timeRemaining -= Time.deltaTime;
+        panel.transform.GetComponentInChildren<Text>().text = timeRemaining.ToString();
+        mercury.sizeDelta = new Vector2(23, 125*(1 - timeRemaining/levelTimeSec));
+        mercury.localPosition = new Vector2(0, (63 * (1 - (timeRemaining/levelTimeSec)))-47);
     }
 }
