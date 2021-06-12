@@ -354,6 +354,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Person
       objectReference: {fileID: 0}
+    - target: {fileID: 3341825878852688615, guid: 2be732efe16115a4ca12514739adb602, type: 3}
+      propertyPath: m_Size.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3341825878852688615, guid: 2be732efe16115a4ca12514739adb602, type: 3}
+      propertyPath: m_Size.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3341825878852688615, guid: 2be732efe16115a4ca12514739adb602, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4a04628e385831a4abd1eb20012c3512, type: 3}
+    - target: {fileID: 3341825878852688615, guid: 2be732efe16115a4ca12514739adb602, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3341825878852688615, guid: 2be732efe16115a4ca12514739adb602, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3341825878852688615, guid: 2be732efe16115a4ca12514739adb602, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2be732efe16115a4ca12514739adb602, type: 3}
 --- !u!1001 &4920996390639442927
