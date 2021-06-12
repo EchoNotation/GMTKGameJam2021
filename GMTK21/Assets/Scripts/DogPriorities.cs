@@ -53,7 +53,7 @@ public class DogPriorities : MonoBehaviour {
             }
 
             string tag = temp[i].tag;
-            float priority = ((1 / dist) * distanceMod) + (float) basePriorities[tag];
+            float priority = ((1 / Mathf.Pow(dist, 2)) * distanceMod) + (float) basePriorities[tag];
             //Debug.Log("Tag: " + tag + " Priority: " + priority);
 
             if(maxIndex == -1) {

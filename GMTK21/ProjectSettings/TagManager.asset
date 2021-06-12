@@ -9,6 +9,7 @@ TagManager:
   - Person
   - Goal
   - Neighbor
+  - Squirrel
   layers:
   - Default
   - TransparentFX
