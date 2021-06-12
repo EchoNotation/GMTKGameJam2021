@@ -28,5 +28,9 @@ public class PlayerMotion : MonoBehaviour
         {
             person.transform.position = Vector2.MoveTowards(person.transform.position, transform.position, distance * Time.deltaTime);
         }
+        leash.transform.position = (dog.transform.position + person.transform.position) / 2;
+        leash.transform.right = dog.transform.position - leash.transform.position;
+        leash.transform.localScale = new Vector3(Vector2.Distance(dog.transform.position, person.transform.position), 0.2f, 0);
+
     }
 }
