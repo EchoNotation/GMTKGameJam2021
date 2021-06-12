@@ -19,11 +19,11 @@ public class CameraController : MonoBehaviour {
 
         int maxXTilespace = tilemap.GetComponent<Tilemap>().size.x;
         cameraWidth = cam.orthographicSize * cam.aspect * 2f;
-        Debug.Log(cameraWidth);
+        //Debug.Log(cameraWidth);
         xMax = tilemap.GetComponent<Tilemap>().CellToWorld(new Vector3Int(maxXTilespace, 0, 0)).x - cameraWidth;
         xMax = Mathf.Floor(xMax);
 
-        Debug.Log("Camera xMin: " + xMin + " xMax: " + xMax);
+        //Debug.Log("Camera xMin: " + xMin + " xMax: " + xMax);
     }
 
     // Update is called once per frame
