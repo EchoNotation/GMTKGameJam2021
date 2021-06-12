@@ -13,7 +13,6 @@ public class CameraController : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         //Calculate the min and max camera x positions from the size of the tilemap.
-        cam = this.gameObject.GetComponent<Camera>();
         GameObject tilemap = GameObject.Find("BaseTilemap");
         xMin = tilemap.GetComponent<Tilemap>().CellToWorld(new Vector3Int(0, 0, 0)).x;
         yMin = tilemap.GetComponent<Tilemap>().CellToWorld(new Vector3Int(0, 0, 0)).y;
