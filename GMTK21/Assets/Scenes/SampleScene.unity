@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1699eec4e7c25d6499eaa6d4e43b7c8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelTimeSec: 500
+  levelTimeSec: 60
   panel: {fileID: 975202527}
 --- !u!1 &429317622
 GameObject:
