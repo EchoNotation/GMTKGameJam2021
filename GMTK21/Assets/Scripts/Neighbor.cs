@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,28 +17,36 @@ public class Neighbor : MonoBehaviour {
     private int petDuration = 1000;
     private float petRange = 8;
     private Stopwatch timer;
+    private Vector2 wanderDirection;
+    private int wanderCounter;
+    private bool wandering;
 
     // Start is called before the first frame update
     void Start() {
         origin = transform.position;
         state = NeighborState.HAS_NOT_PET_DOG;
         timer = new Stopwatch();
+        wandering = false;
+        wanderCounter = 60;
     }
 
     // Update is called once per frame
-    void Update() {
+    void FixedUpdate() {
         Vector2 dogLoc = GameObject.FindGameObjectWithTag("Dog").transform.position;
-        UnityEngine.Debug.Log(state);
 
         if(state == NeighborState.HAS_NOT_PET_DOG && Mathf.Abs(Vector2.Distance(transform.position, dogLoc)) <= petRange) {
             //Move towards the dog-- Check to see if the dog is wet?
             Vector2 newLoc = Vector2.MoveTowards(transform.position, dogLoc, Time.deltaTime * speed);
             transform.position = new Vector3(newLoc.x, newLoc.y, 0);
         }
+        else if(state == NeighborState.HAS_NOT_PET_DOG) {
+            wander();
+        }
         else if(state == NeighborState.HAS_PET_DOG) {
             //Return to origin? Wander?
-            Vector2 newLoc = Vector2.MoveTowards(transform.position, origin, Time.deltaTime * speed * 0.5f);
-            transform.position = new Vector3(newLoc.x, newLoc.y, 0);
+            /*Vector2 newLoc = Vector2.MoveTowards(transform.position, origin, Time.deltaTime * speed * 0.5f);
+            transform.position = new Vector3(newLoc.x, newLoc.y, 0);*/
+            wander();
         }
         else {
             //Neighbor is currently petting dog... Need to track to ensure neighbor remains next to dog?
@@ -51,7 +60,20 @@ public class Neighbor : MonoBehaviour {
     }
 
     void wander() {
+        if(wandering) {
+            transform.position = new Vector3(transform.position.x + (wanderDirection.x * speed * 0.5f * Time.deltaTime), transform.position.y + (wanderDirection.y * speed * 0.5f * Time.deltaTime), 0);
+            wanderCounter--;
 
+            if(wanderCounter <= 0) {
+                wandering = false;
+            }
+        }
+        else {
+            float angle = UnityEngine.Random.Range(0, 359);
+            wanderDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+            wanderCounter = UnityEngine.Random.Range(45, 125);
+            wandering = true;
+        }
     }
 
     public void beginPettingDog() {
