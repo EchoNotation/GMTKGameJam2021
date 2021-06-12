@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Transactions;
 using Unity.Collections.LowLevel.Unsafe;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
@@ -28,11 +29,12 @@ public class ThrowTreat : MonoBehaviour
         if(Input.GetMouseButtonDown(0) && timer.ElapsedMilliseconds - lastTime >= treatRateOfFire) {
             //Attempt to throw treat.
             lastTime = timer.ElapsedMilliseconds;
+
             Vector3 mouseClickLocation = cam.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 treatDestination = new Vector3(mouseClickLocation.x, mouseClickLocation.y);
+            Vector2 treatDestination = new Vector2(mouseClickLocation.x, mouseClickLocation.y);
 
-            //Check to see if destination point is within range of player.
-
+            //Check to see if destination point is within range of player
+            if(Vector2.Distance(transform.position, treatDestination) > throwRange) return;
 
             //Initialize treat with destination position
 
