@@ -8,6 +8,10 @@ public class Treat : MonoBehaviour
     private float speed = 10;
     private bool treatSafety = true;
 
+    private void Start() {
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -16,6 +20,7 @@ public class Treat : MonoBehaviour
         if(Vector2.Distance(new Vector2(transform.position.x, transform.position.y), destination) <= 0.1 && treatSafety) {
             //Debug.Log("Treat stopped moving");
             GameObject.FindGameObjectWithTag("Dog").GetComponent<DogPriorities>().addNewObject(gameObject);
+            gameObject.GetComponent<BoxCollider2D>().enabled = true;
             treatSafety = false;
         }
     }
