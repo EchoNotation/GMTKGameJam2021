@@ -32,7 +32,8 @@ public class DogTriggers : MonoBehaviour
     {
 
         timeRemaining -= Time.deltaTime;
-        panel.transform.GetComponentInChildren<Text>().text = timeRemaining.ToString();
+        float temp = Mathf.Round(timeRemaining * 100f) / 100f;
+        panel.transform.GetComponentInChildren<Text>().text = temp.ToString();
         mercury.sizeDelta = new Vector2(23, 125*(1 - timeRemaining/levelTimeSec));
         //for some reason
         mercury.localPosition = new Vector2(0, (63 * (1 - (timeRemaining/levelTimeSec)))-47);
