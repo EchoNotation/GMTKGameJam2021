@@ -41,6 +41,8 @@ public class ThrowTreat : MonoBehaviour
             GameObject spawnedTreat = Instantiate(treat, transform.position, Quaternion.identity);
             spawnedTreat.GetComponent<Treat>().setTreatDestination(treatDestination);
 
+            //Does this need to notify the priority system?
+
         }
     }
 }
