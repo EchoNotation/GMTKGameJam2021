@@ -43,17 +43,23 @@ public class DistractionsManager : MonoBehaviour
 
 
     //position, type
-    public static string AddDistraction(Vector2 pos, string eventName, Unitye)
+    public static string AddDistraction(Vector2 pos, string eventName, UnityAction listener)
     {
         UnityEvent thisEvent = null;
         if (instance.distractionsDictionary.TryGetValue (eventName, out thisEvent))
         {
-            thisEvent.AddListener()
+            thisEvent.AddListener(listener);
         }
         return "genrate a uniqueId";
     }
 
-    public void RemoveDistraction(string uId) {
+    public void AddListener()
+    {
+
+    }
+
+    public void RemoveDistraction(string uId)
+    {
 
     }
     // Start is called before the first frame update
