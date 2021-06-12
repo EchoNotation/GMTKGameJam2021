@@ -24,7 +24,7 @@ public class PlayerMotion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey("space"))
+        if (Input.GetKey("space") && GetComponent<DogTriggers>().isGameTime)
         {
             //Debug.Log("space");
             transform.position = Vector2.MoveTowards(transform.position, target, Mathf.Max(0,(speed-pullSpeed)) * Time.deltaTime);
