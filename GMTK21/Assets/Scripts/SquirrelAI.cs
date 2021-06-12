@@ -15,7 +15,7 @@ public class SquirrelAI : MonoBehaviour
     public float dangerRange = 5;
     private Vector2 origin;
     private SquirrelState state;
-    private float speed = 3;
+    private float speed = 9;
     private Stopwatch timer;
     private Vector2 wanderDirection;
     private int wanderCounter;

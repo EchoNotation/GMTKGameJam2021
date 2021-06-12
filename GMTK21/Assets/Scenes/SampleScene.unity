@@ -10174,7 +10174,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5a97254e8137d24f96d28a5e61aaae4, type: 3}
-  m_ObjectHideFlags: 0
 --- !u!1 &1904912572
 GameObject:
   m_ObjectHideFlags: 0
@@ -10382,6 +10381,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4647346628117610886, guid: f9ea9a6e0c3ce2b488e522dceef57b13, type: 3}
       propertyPath: m_Name
+      value: Squirrel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4647346628117610886, guid: f9ea9a6e0c3ce2b488e522dceef57b13, type: 3}
+      propertyPath: m_TagString
       value: Squirrel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
