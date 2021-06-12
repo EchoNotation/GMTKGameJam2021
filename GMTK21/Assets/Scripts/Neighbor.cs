@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public enum NeighborState {
@@ -28,6 +29,8 @@ public class Neighbor : MonoBehaviour {
         timer = new Stopwatch();
         wandering = false;
         wanderCounter = 60;
+
+        GameObject.FindGameObjectWithTag("Dog").GetComponent<DogPriorities>().addNewObject(gameObject);
     }
 
     // Update is called once per frame

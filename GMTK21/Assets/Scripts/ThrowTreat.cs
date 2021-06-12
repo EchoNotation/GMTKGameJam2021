@@ -42,7 +42,7 @@ public class ThrowTreat : MonoBehaviour
             spawnedTreat.GetComponent<Treat>().setTreatDestination(treatDestination);
 
             //Does this need to notify the priority system?
-
+            GameObject.FindGameObjectWithTag("Dog").GetComponent<DogPriorities>().addNewObject(spawnedTreat);
         }
     }
 }
