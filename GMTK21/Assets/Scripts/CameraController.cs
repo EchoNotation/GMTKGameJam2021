@@ -13,18 +13,22 @@ public class CameraController : MonoBehaviour {
     void Start() {
         //Calculate the min and max camera x positions from the size of the tilemap.
         GameObject tilemap = GameObject.Find("BaseTilemap");
-        xMin = tilemap.GetComponent<Tilemap>().CellToWorld(new Vector3Int(0, 0, 0)).x;
-        yMin = tilemap.GetComponent<Tilemap>().CellToWorld(new Vector3Int(0, 0, 0)).y;
+        cameraWidth = cam.orthographicSize * cam.aspect * 2f;
+        cameraHeight = cam.orthographicSize * 2f;
+
+        xMin = Mathf.Ceil(tilemap.GetComponent<Tilemap>().CellToWorld(tilemap.GetComponent<Tilemap>().origin).x + (cameraWidth / 2));
+        yMin = Mathf.Ceil(tilemap.GetComponent<Tilemap>().CellToWorld(tilemap.GetComponent<Tilemap>().origin).y + (cameraHeight / 2));
 
         int maxXTilespace = tilemap.GetComponent<Tilemap>().size.x;
         int maxYTilespace = tilemap.GetComponent<Tilemap>().size.y;
-        cameraWidth = cam.orthographicSize * cam.aspect * 2f;
-        cameraHeight = cam.orthographicSize * 2f;
+
         //Debug.Log(cameraWidth);
-        xMax = tilemap.GetComponent<Tilemap>().CellToWorld(new Vector3Int(maxXTilespace, 0, 0)).x - cameraWidth;
+        /*xMax = tilemap.GetComponent<Tilemap>().CellToWorld(new Vector3Int(maxXTilespace, Mathf.FloorToInt(yMin), 0)).x - (cameraWidth / 2);
         xMax = Mathf.Floor(xMax);
-        yMax = tilemap.GetComponent<Tilemap>().CellToWorld(new Vector3Int(0, maxYTilespace, 0)).y - cameraHeight;
-        yMax = Mathf.Floor(yMax);
+        yMax = tilemap.GetComponent<Tilemap>().CellToWorld(new Vector3Int(Mathf.FloorToInt(xMin), maxYTilespace, 0)).y - (cameraHeight / 2);
+        yMax = Mathf.Floor(yMax);*/
+        xMax = Mathf.Floor(xMin + maxXTilespace - cameraWidth);
+        yMax = Mathf.Floor(yMin + maxYTilespace - cameraHeight);
 
         Debug.Log("Camera xMin: " + xMin + " xMax: " + xMax + " yMin: " + yMin + " yMax: " + yMax);
     }
