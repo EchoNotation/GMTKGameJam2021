@@ -27,7 +27,7 @@ public class DogTriggers : MonoBehaviour
         }
         else if(collider.CompareTag("Neighbor")) {
             collider.GetComponent<Neighbor>().beginPettingDog();
-            //Alert the dog that it is being pet!
+            gameObject.GetComponent<DogPriorities>().setIsBeingPet(true);
         }
         else if(collider.CompareTag("Treat")) {
             gameObject.GetComponent<DogPriorities>().removeObject(collider.gameObject);

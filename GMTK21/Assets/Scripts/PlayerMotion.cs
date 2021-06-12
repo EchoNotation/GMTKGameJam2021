@@ -26,7 +26,7 @@ public class PlayerMotion : MonoBehaviour
     {
         if (Input.GetKey("space"))
         {
-            Debug.Log("space");
+            //Debug.Log("space");
             transform.position = Vector2.MoveTowards(transform.position, target, Mathf.Max(0,(speed-pullSpeed)) * Time.deltaTime);
         }
         else

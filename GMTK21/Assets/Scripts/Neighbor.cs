@@ -37,7 +37,7 @@ public class Neighbor : MonoBehaviour {
     void FixedUpdate() {
         Vector2 dogLoc = GameObject.FindGameObjectWithTag("Dog").transform.position;
 
-        if(state == NeighborState.HAS_NOT_PET_DOG && Mathf.Abs(Vector2.Distance(transform.position, dogLoc)) <= petRange) {
+        if(state == NeighborState.HAS_NOT_PET_DOG && Vector2.Distance(transform.position, dogLoc) <= petRange) {
             //Move towards the dog-- Check to see if the dog is wet?
             Vector2 newLoc = Vector2.MoveTowards(transform.position, dogLoc, Time.deltaTime * speed);
             transform.position = new Vector3(newLoc.x, newLoc.y, 0);
@@ -58,6 +58,8 @@ public class Neighbor : MonoBehaviour {
                 //Done petting dog.
                 state = NeighborState.HAS_PET_DOG;
                 timer.Stop();
+                GameObject.FindGameObjectWithTag("Dog").GetComponent<DogPriorities>().setIsBeingPet(false);
+                GameObject.FindGameObjectWithTag("Dog").GetComponent<DogPriorities>().removeObject(gameObject);
             }
         }
     }

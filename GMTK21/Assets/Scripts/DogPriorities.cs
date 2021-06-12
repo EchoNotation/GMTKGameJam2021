@@ -9,10 +9,12 @@ public class DogPriorities : MonoBehaviour {
     private Vector2 previousLoc;
     private float distanceMod = 0.2f;
     private Hashtable basePriorities;
+    private bool isBeingPet;
 
     // Start is called before the first frame update
     void Start() {
         basePriorities = new Hashtable();
+        isBeingPet = false;
         basePriorities.Add("Treat", 5f);
         basePriorities.Add("Neighbor", 2f);
         basePriorities.Add("Squirrel", 7f);
@@ -23,12 +25,17 @@ public class DogPriorities : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        GameObject objectOfInterest = findHighestPriority();
-        Vector2 objectLoc = new Vector2(objectOfInterest.transform.position.x, objectOfInterest.transform.position.y);
+        if(isBeingPet) {
+            gameObject.GetComponent<PlayerMotion>().setSpeed(0);
+        }
+        else {
+            GameObject objectOfInterest = findHighestPriority();
+            Vector2 objectLoc = new Vector2(objectOfInterest.transform.position.x, objectOfInterest.transform.position.y);
 
-        if(previousLoc != objectLoc) {
-            GameObject.Find("Dog").GetComponent<PlayerMotion>().setTargetDestination(objectLoc);
-            previousLoc = objectLoc;
+            if(previousLoc != objectLoc) {
+                GameObject.Find("Dog").GetComponent<PlayerMotion>().setTargetDestination(objectLoc);
+                previousLoc = objectLoc;
+            }
         }
     }
 
@@ -72,5 +79,9 @@ public class DogPriorities : MonoBehaviour {
 
     public void removeObject(GameObject obj) {
         objects.Remove(obj);
+    }
+
+    public void setIsBeingPet(bool newStatus) {
+        isBeingPet = newStatus;
     }
 }
