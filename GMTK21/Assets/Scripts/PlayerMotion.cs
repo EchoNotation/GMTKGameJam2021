@@ -9,6 +9,7 @@ public class PlayerMotion : MonoBehaviour
     public GameObject leash;
     public Vector2 target = new Vector2();
     public float speed = 10f;
+    public float pullSpeed = 5f;
 
     public float leashLen = 2f;
 
@@ -22,7 +23,15 @@ public class PlayerMotion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        if (Input.GetKey("space"))
+        {
+            Debug.Log("space");
+            transform.position = Vector2.MoveTowards(transform.position, target, (speed-pullSpeed) * Time.deltaTime);
+        }
+        else
+        {
+            transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        }
         float distance = Vector2.Distance(transform.position, person.transform.position);
         if (distance >= leashLen)
         {
