@@ -21,11 +21,9 @@ public class PointHome : MonoBehaviour
         transform.right = home.transform.position - parent.transform.position;
         transform.localPosition = (home.transform.position - parent.transform.position).normalized * radius;
         if (Vector3.Distance(home.transform.position, parent.transform.position) >= cam.orthographicSize * 1.5f) {
-            //Debug.Log("image on");
             transform.GetComponent<SpriteRenderer>().enabled = true;
         }
         else{
-            //Debug.Log("image off");
             transform.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
