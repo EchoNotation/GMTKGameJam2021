@@ -26,7 +26,7 @@ public class PlayerMotion : MonoBehaviour
         float distance = Vector2.Distance(transform.position, person.transform.position);
         if (distance >= leashLen)
         {
-            person.transform.position = Vector2.MoveTowards(person.transform.position, transform.position, distance * Time.deltaTime * 10);
+            person.transform.position = Vector2.MoveTowards(person.transform.position, transform.position, distance * Time.deltaTime * 5);
         }
         leash.transform.position = (dog.transform.position + person.transform.position) / 2;
         leash.transform.right = dog.transform.position - leash.transform.position;
