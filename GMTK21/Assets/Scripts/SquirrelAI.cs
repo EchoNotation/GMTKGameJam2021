@@ -9,18 +9,21 @@ public class SquirrelAI : MonoBehaviour
     public enum SquirrelState {
         WANDER,
         RUN,
+        RETREAT,
         HIDE,
     }
 
     public float buffer = 3;
-    public float dangerRange = 5;
+    public float dangerRange = 4;
+    public float hideForSeconds = 4;
     private Vector2 origin;
     private SquirrelState state;
-    private float speed = 9;
+    private float speed = 13;
     private Stopwatch timer;
     private Vector2 wanderDirection;
     private int wanderCounter;
     private bool wandering;
+    private GameObject dog, localTree;
 
     // Start is called before the first frame update
     void Start()
@@ -31,36 +34,53 @@ public class SquirrelAI : MonoBehaviour
         wandering = false;
         wanderCounter = 20;
 
-        GameObject.FindGameObjectWithTag("Dog").GetComponent<DogPriorities>().addNewObject(gameObject);
+        dog = GameObject.FindGameObjectWithTag("Dog");
+        dog.GetComponent<DogPriorities>().addNewObject(gameObject);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector2 dogLoc = GameObject.FindGameObjectWithTag("Dog").transform.position;
-
-        if(Vector2.Distance(dogLoc, transform.position) <= dangerRange)
-        {
-            state = SquirrelState.RUN;
-        }
+        Vector2 dogLoc = dog.transform.position;
+        float dist = Vector2.Distance(transform.position, dogLoc);
 
         switch(state) {
             case SquirrelState.WANDER:
                 wander();
+                if (dist <= dangerRange)
+                {
+                    state = SquirrelState.RUN;
+                    goto case SquirrelState.RUN;
+                }
                 break;
             case SquirrelState.RUN:
-                if (Vector2.Distance(transform.position, dogLoc) <= (dangerRange + buffer))
+                transform.position = Vector2.MoveTowards(transform.position, dogLoc, Time.deltaTime * -speed);
+                if (dist > (dangerRange + buffer))
                 {
-                    //Move towards the dog-- Check to see if the dog is wet?
-                    transform.position = Vector2.MoveTowards(transform.position, dogLoc, Time.deltaTime * -speed);
+                    state = SquirrelState.RETREAT;
+                    localTree = FindNearestByTag("Tree");
+                    goto case SquirrelState.RETREAT;
                 }
-                else
+                break;
+            case SquirrelState.RETREAT:
+                Vector2 treeLoc = localTree.transform.position;
+                transform.position = Vector2.MoveTowards(transform.position, treeLoc, Time.deltaTime * speed);
+
+                if (Vector2.Distance(transform.position, treeLoc) == 0)
                 {
+                    GameObject.FindGameObjectWithTag("Dog").GetComponent<DogPriorities>().removeObject(gameObject);
+                    timer.Start();
                     state = SquirrelState.HIDE;
                 }
                 break;
             case SquirrelState.HIDE:
-                transform.position = Vector2.MoveTowards(transform.position, FindNearestByTag("Tree").transform.position, Time.deltaTime);
+                if (timer.ElapsedMilliseconds > (hideForSeconds * 1000))
+                {
+                    state = SquirrelState.WANDER;
+                    timer.Stop();
+                    timer.Reset();
+                    GameObject.FindGameObjectWithTag("Dog").GetComponent<DogPriorities>().addNewObject(gameObject);
+                }
                 break;
             default:
                 UnityEngine.Debug.LogError("Squirrel state invalid: " + state);
