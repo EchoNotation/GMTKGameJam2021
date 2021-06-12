@@ -8,7 +8,6 @@ public class CameraController : MonoBehaviour {
     public GameObject person;
     private float xMin, xMax, yMin, yMax;
     private float cameraWidth, cameraHeight;
-    private float cameraZ = -10;
 
     // Start is called before the first frame update
     void Start() {
@@ -53,6 +52,6 @@ public class CameraController : MonoBehaviour {
             cameraY = yMin;
         }
 
-        transform.position = new Vector3(cameraX, cameraY, cameraZ);
+        transform.position = new Vector3(cameraX, cameraY, 0);
     }
 }
