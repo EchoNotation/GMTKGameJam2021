@@ -13,6 +13,7 @@ public class CameraController : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         //Calculate the min and max camera x positions from the size of the tilemap.
+        cam = this.gameObject.GetComponent<Camera>();
         GameObject tilemap = GameObject.Find("BaseTilemap");
         xMin = tilemap.GetComponent<Tilemap>().CellToWorld(new Vector3Int(0, 0, 0)).x;
 
@@ -27,22 +28,18 @@ public class CameraController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        //Camera needs to be able to scroll horizontally only, but up to a point.a
+        //Camera needs to be able to scroll horizontally only, but up to a point.
 
-        //Determine if the person object's position is too far to one side or the other.
-        //If so, then move the camera in the opposite direction by the same displacement.
-        /*float personX = person.transform.position.x;
+        float personX = person.transform.position.x;
+
         if(personX >= xMax) {
-            float xDisplacement = xMax - personX;
-            cam.transform.position = new Vector3(xDisplacement, 0, cameraHeight);
-
+            cam.transform.position = new Vector3(xMax, 0, -10);
         }
         else if(personX <= xMin) {
-            float xDisplacement = xMin - personX;
-            cam.transform.position = new Vector3(xDisplacement, 0, cameraHeight);
+            cam.transform.position = new Vector3(xMin, 0, -10);
         }
         else {
-            cam.transform.position = new Vector3(0, 0, cameraHeight);
-        }*/
+            cam.transform.position = new Vector3(person.transform.position.x, 0, cameraHeight);
+        }
     }
 }
