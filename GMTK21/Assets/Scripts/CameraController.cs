@@ -6,9 +6,9 @@ using UnityEngine.Tilemaps;
 public class CameraController : MonoBehaviour {
     public Camera cam;
     public GameObject person;
-    private float xMin, xMax;
-    private float cameraWidth;
-    private float cameraHeight = -10;
+    private float xMin, xMax, yMin, yMax;
+    private float cameraWidth, cameraHeight;
+    private float cameraZ = -10;
 
     // Start is called before the first frame update
     void Start() {
@@ -16,14 +16,19 @@ public class CameraController : MonoBehaviour {
         cam = this.gameObject.GetComponent<Camera>();
         GameObject tilemap = GameObject.Find("BaseTilemap");
         xMin = tilemap.GetComponent<Tilemap>().CellToWorld(new Vector3Int(0, 0, 0)).x;
+        yMin = tilemap.GetComponent<Tilemap>().CellToWorld(new Vector3Int(0, 0, 0)).y;
 
         int maxXTilespace = tilemap.GetComponent<Tilemap>().size.x;
+        int maxYTilespace = tilemap.GetComponent<Tilemap>().size.y;
         cameraWidth = cam.orthographicSize * cam.aspect * 2f;
+        cameraHeight = cam.orthographicSize * 2f;
         //Debug.Log(cameraWidth);
         xMax = tilemap.GetComponent<Tilemap>().CellToWorld(new Vector3Int(maxXTilespace, 0, 0)).x - cameraWidth;
         xMax = Mathf.Floor(xMax);
+        yMax = tilemap.GetComponent<Tilemap>().CellToWorld(new Vector3Int(0, maxYTilespace, 0)).y - cameraHeight;
+        yMax = Mathf.Floor(yMax);
 
-        //Debug.Log("Camera xMin: " + xMin + " xMax: " + xMax);
+        Debug.Log("Camera xMin: " + xMin + " xMax: " + xMax + " yMin: " + yMin + " yMax: " + yMax);
     }
 
     // Update is called once per frame
@@ -31,15 +36,24 @@ public class CameraController : MonoBehaviour {
         //Camera needs to be able to scroll horizontally only, but up to a point.
 
         float personX = person.transform.position.x;
+        float personY = person.transform.position.y;
+        float cameraX = personX;
+        float cameraY = personY;
 
         if(personX >= xMax) {
-            cam.transform.position = new Vector3(xMax, 0, -10);
+            cameraX = xMax;
         }
         else if(personX <= xMin) {
-            cam.transform.position = new Vector3(xMin, 0, -10);
+            cameraX = xMin;
         }
-        else {
-            cam.transform.position = new Vector3(person.transform.position.x, 0, cameraHeight);
+        
+        if(personY >= yMax) {
+            cameraY = yMax;
         }
+        else if(personY <= yMin) {
+            cameraY = yMin;
+        }
+
+        transform.position = new Vector3(cameraX, cameraY, cameraZ);
     }
 }

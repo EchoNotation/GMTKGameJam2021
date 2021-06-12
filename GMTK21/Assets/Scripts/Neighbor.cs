@@ -27,6 +27,7 @@ public class Neighbor : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         Vector2 dogLoc = GameObject.FindGameObjectWithTag("Dog").transform.position;
+        UnityEngine.Debug.Log(state);
 
         if(state == NeighborState.HAS_NOT_PET_DOG && Mathf.Abs(Vector2.Distance(transform.position, dogLoc)) <= petRange) {
             //Move towards the dog-- Check to see if the dog is wet?
@@ -53,10 +54,8 @@ public class Neighbor : MonoBehaviour {
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
-        if(collision.collider.CompareTag("Dog")) {
-            state = NeighborState.PETTING_DOG;
-            timer.Start();
-        }
+    public void beginPettingDog() {
+        state = NeighborState.PETTING_DOG;
+        timer.Start();
     }
 }
