@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Windows.Speech;
 
 public class DogPriorities : MonoBehaviour {
-    private List<GameObject> objects;
+    private List<GameObject> objects = new List<GameObject>();
     private Vector2 previousLoc;
     private float distanceMod = 0.2f;
     private Hashtable basePriorities;
 
     // Start is called before the first frame update
     void Start() {
-        objects = new List<GameObject>();
         basePriorities = new Hashtable();
         basePriorities.Add("Treat", 5f);
         basePriorities.Add("Neighbor", 2f);
@@ -34,15 +35,17 @@ public class DogPriorities : MonoBehaviour {
     private GameObject findHighestPriority() {
         int maxIndex = -1;
         float maxPriority = -1;
+        GameObject[] temp = objects.ToArray();
+        //Debug.Log(temp.Length);
 
-        for(int i = 0; i < objects.Count; i++) {
-            float dist = Vector2.Distance(transform.position, objects[i].transform.position);
+        for(int i = 0; i < temp.Length; i++) {
+            float dist = Vector2.Distance(transform.position, temp[i].transform.position);
 
             if(dist < 0.5) {
                 dist = 0.5f;
             }
 
-            string tag = objects[i].tag;
+            string tag = temp[i].tag;
             float priority = ((1 / dist) * distanceMod) + (float) basePriorities[tag];
             //Debug.Log("Tag: " + tag + " Priority: " + priority);
 
@@ -56,10 +59,14 @@ public class DogPriorities : MonoBehaviour {
             }
         }
 
-        return objects[maxIndex];
+        float dogSpeedPercent = maxPriority / 10f;
+        gameObject.GetComponent<PlayerMotion>().setSpeed(dogSpeedPercent);
+
+        return temp[maxIndex];
     }
 
     public void addNewObject(GameObject obj) {
+        //Debug.Log("Added " + obj.tag);
         objects.Add(obj);
     }
 
