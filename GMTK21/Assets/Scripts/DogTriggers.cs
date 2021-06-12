@@ -10,7 +10,7 @@ public class DogTriggers : MonoBehaviour
     private float timeRemaining;
     public GameObject panel;
     private RectTransform mercury;
-    private bool isGameTime = false;
+    public bool isGameTime = false;
 
     private void Start()
     {
@@ -20,7 +20,7 @@ public class DogTriggers : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collider) {
-        if(collider.CompareTag("Goal")) {
+        if(collider.CompareTag("Goal") && isGameTime) {
             //Level complete!
             Debug.Log("Level complete!");
             isGameTime = false;
