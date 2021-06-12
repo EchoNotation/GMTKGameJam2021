@@ -224,8 +224,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d05ad7422ef19d44285a1899b38c6ecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
-  person: {fileID: 853288757}
+  cam: {fileID: 429317624}
+  person: {fileID: 1318304009}
 --- !u!1 &705766179
 GameObject:
   m_ObjectHideFlags: 0
@@ -5790,11 +5790,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &853288757 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3857404077980030069, guid: 1aa4600464d010f468f4b6fcd80c0ac8, type: 3}
-  m_PrefabInstance: {fileID: 3857404077208579403}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1154176937
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5816,7 +5811,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3341825878134390217, guid: 2be732efe16115a4ca12514739adb602, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3341825878134390217, guid: 2be732efe16115a4ca12514739adb602, type: 3}
       propertyPath: m_LocalRotation.w
