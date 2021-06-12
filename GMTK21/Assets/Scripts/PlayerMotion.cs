@@ -8,7 +8,8 @@ public class PlayerMotion : MonoBehaviour
     public GameObject person;
     public GameObject leash;
     public Vector2 target = new Vector2();
-    public float speed = 10f;
+    public float maxSpeed = 10f;
+    private float speed = 5f;
     public float pullSpeed = 5f;
 
     public float leashLen = 2f;
@@ -26,7 +27,7 @@ public class PlayerMotion : MonoBehaviour
         if (Input.GetKey("space"))
         {
             Debug.Log("space");
-            transform.position = Vector2.MoveTowards(transform.position, target, (speed-pullSpeed) * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, target, Mathf.Max(0,(speed-pullSpeed)) * Time.deltaTime);
         }
         else
         {
@@ -45,5 +46,9 @@ public class PlayerMotion : MonoBehaviour
 
     public void setTargetDestination(Vector2 newTarget) {
         target = newTarget;
+    }
+
+    public void setSpeed(float speedPercent) {
+        speed = speedPercent * maxSpeed;//speedPercent should be between 0 and 1
     }
 }
