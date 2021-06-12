@@ -10,6 +10,7 @@ TagManager:
   - Goal
   - Neighbor
   - Squirrel
+  - Tree
   layers:
   - Default
   - TransparentFX
