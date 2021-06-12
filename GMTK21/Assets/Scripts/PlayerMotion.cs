@@ -42,4 +42,8 @@ public class PlayerMotion : MonoBehaviour
         leash.transform.localScale = new Vector3(Vector2.Distance(dog.transform.position, person.transform.position), 0.2f, 0);
 
     }
+
+    public void setTargetDestination(Vector2 newTarget) {
+        target = newTarget;
+    }
 }
