@@ -5,10 +5,11 @@ using System.Diagnostics;
 
 public class SquirrelAI : MonoBehaviour
 {
-    
+
     public enum SquirrelState {
         WANDER,
-        RUN
+        RUN,
+        HIDE,
     }
 
     public float buffer = 3;
@@ -43,22 +44,27 @@ public class SquirrelAI : MonoBehaviour
             state = SquirrelState.RUN;
         }
 
-        if (state == SquirrelState.RUN && Vector2.Distance(transform.position, dogLoc) <= (dangerRange + buffer))
-        {
-            //Move towards the dog-- Check to see if the dog is wet?
-            transform.position = Vector2.MoveTowards(transform.position, dogLoc, Time.deltaTime * -speed);
-        }
-        else if (state == SquirrelState.RUN) {
-            state = SquirrelState.WANDER;
-        }
-        else if (state == SquirrelState.WANDER)
-        {
-            wander();
-        }
-        else
-        {
-            //Neighbor is currently petting dog... Need to track to ensure neighbor remains next to dog?
-            //Notify dog that it is being pet so it stops moving?
+        switch(state) {
+            case SquirrelState.WANDER:
+                wander();
+                break;
+            case SquirrelState.RUN:
+                if (Vector2.Distance(transform.position, dogLoc) <= (dangerRange + buffer))
+                {
+                    //Move towards the dog-- Check to see if the dog is wet?
+                    transform.position = Vector2.MoveTowards(transform.position, dogLoc, Time.deltaTime * -speed);
+                }
+                else
+                {
+                    state = SquirrelState.HIDE;
+                }
+                break;
+            case SquirrelState.HIDE:
+                transform.position = Vector2.MoveTowards(transform.position, FindNearestByTag("Tree").transform.position, Time.deltaTime);
+                break;
+            default:
+                UnityEngine.Debug.LogError("Squirrel state invalid: " + state);
+                break;
         }
     }
 
@@ -82,4 +88,25 @@ public class SquirrelAI : MonoBehaviour
             wandering = true;
         }
     }
+
+    public GameObject FindNearestByTag(string tag)
+    {
+        GameObject[] gos;
+        gos = GameObject.FindGameObjectsWithTag(tag);
+        GameObject closest = null;
+        float distance = Mathf.Infinity;
+        Vector3 position = transform.position;
+        foreach (GameObject go in gos)
+        {
+            Vector3 diff = go.transform.position - position;
+            float curDistance = diff.sqrMagnitude;
+            if (curDistance < distance)
+            {
+                closest = go;
+                distance = curDistance;
+            }
+        }
+        return closest;
+    }
 }
+// run away first, the outside of danger zone run towards nearest tree
