@@ -204,10 +204,6 @@ PrefabInstance:
       propertyPath: home
       value: 
       objectReference: {fileID: 962122977}
-    - target: {fileID: 1901257067, guid: 2be732efe16115a4ca12514739adb602, type: 3}
-      propertyPath: parent
-      value: 
-      objectReference: {fileID: 587263987}
     - target: {fileID: 3341825878134390217, guid: 2be732efe16115a4ca12514739adb602, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -12883,9 +12879,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5780406566290604424, guid: e1f16d7c6a3f53b4d950c0a198c05699, type: 3}
+      propertyPath: hold
+      value: 
+      objectReference: {fileID: -6248698276573809173, guid: 98aa0a641f843404694ef2121ab7020f, type: 3}
+    - target: {fileID: 5780406566290604424, guid: e1f16d7c6a3f53b4d950c0a198c05699, type: 3}
       propertyPath: leash
       value: 
       objectReference: {fileID: 1239338587}
+    - target: {fileID: 5780406566290604424, guid: e1f16d7c6a3f53b4d950c0a198c05699, type: 3}
+      propertyPath: walk1
+      value: 
+      objectReference: {fileID: 7783805045399248265, guid: 98aa0a641f843404694ef2121ab7020f, type: 3}
+    - target: {fileID: 5780406566290604424, guid: e1f16d7c6a3f53b4d950c0a198c05699, type: 3}
+      propertyPath: walk2
+      value: 
+      objectReference: {fileID: -3097149836137737942, guid: 98aa0a641f843404694ef2121ab7020f, type: 3}
+    - target: {fileID: 5780406566290604424, guid: e1f16d7c6a3f53b4d950c0a198c05699, type: 3}
+      propertyPath: walk3
+      value: 
+      objectReference: {fileID: 6962240038297838341, guid: 98aa0a641f843404694ef2121ab7020f, type: 3}
     - target: {fileID: 5780406566290604424, guid: e1f16d7c6a3f53b4d950c0a198c05699, type: 3}
       propertyPath: person
       value: 
