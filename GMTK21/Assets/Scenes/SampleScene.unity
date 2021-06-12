@@ -3794,6 +3794,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3857404077980030068, guid: 1aa4600464d010f468f4b6fcd80c0ac8, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 429317624}
     - target: {fileID: 3857404077980030069, guid: 1aa4600464d010f468f4b6fcd80c0ac8, type: 3}
       propertyPath: m_Name
       value: TreatCannon
