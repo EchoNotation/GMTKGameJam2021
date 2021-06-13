@@ -25,16 +25,18 @@ public class DogPriorities : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if(isBeingPet) {
-            gameObject.GetComponent<PlayerMotion>().setSpeed(0);
-        }
-        else {
-            GameObject objectOfInterest = findHighestPriority();
-            Vector2 objectLoc = new Vector2(objectOfInterest.transform.position.x, objectOfInterest.transform.position.y);
+        if(!GameObject.Find("CameraCart").GetComponent<CameraController>().currentlyInTransition()) {
+            if(isBeingPet) {
+                gameObject.GetComponent<PlayerMotion>().setSpeed(0);
+            }
+            else {
+                GameObject objectOfInterest = findHighestPriority();
+                Vector2 objectLoc = new Vector2(objectOfInterest.transform.position.x, objectOfInterest.transform.position.y);
 
-            if(previousLoc != objectLoc) {
-                GameObject.Find("Dog").GetComponent<PlayerMotion>().setTargetDestination(objectLoc);
-                previousLoc = objectLoc;
+                if(previousLoc != objectLoc) {
+                    GameObject.Find("Dog").GetComponent<PlayerMotion>().setTargetDestination(objectLoc);
+                    previousLoc = objectLoc;
+                }
             }
         }
     }

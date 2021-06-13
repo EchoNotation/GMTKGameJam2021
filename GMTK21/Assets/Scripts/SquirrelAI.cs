@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Diagnostics;
 
-public class SquirrelAI : MonoBehaviour
-{
+public class SquirrelAI : MonoBehaviour {
 
     public enum SquirrelState {
         WANDER,
@@ -26,8 +25,7 @@ public class SquirrelAI : MonoBehaviour
     private GameObject dog, localTree;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         origin = transform.position;
         state = SquirrelState.WANDER;
         timer = new Stopwatch();
@@ -39,24 +37,22 @@ public class SquirrelAI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
-    {
-        Vector2 dogLoc = dog.transform.position;
-        float dist = Vector2.Distance(transform.position, dogLoc);
+    void FixedUpdate() {
+        if(!GameObject.Find("CameraCart").GetComponent<CameraController>().currentlyInTransition()) {
+            Vector2 dogLoc = dog.transform.position;
+            float dist = Vector2.Distance(transform.position, dogLoc);
 
-        switch(state) {
+            switch(state) {
             case SquirrelState.WANDER:
                 wander();
-                if (dist <= dangerRange)
-                {
+                if(dist <= dangerRange) {
                     state = SquirrelState.RUN;
                     goto case SquirrelState.RUN;
                 }
                 break;
             case SquirrelState.RUN:
                 transform.position = Vector2.MoveTowards(transform.position, dogLoc, Time.deltaTime * -speed);
-                if (dist > (dangerRange + buffer))
-                {
+                if(dist > (dangerRange + buffer)) {
                     state = SquirrelState.RETREAT;
                     localTree = FindNearestByTag("Tree");
                     goto case SquirrelState.RETREAT;
@@ -66,16 +62,14 @@ public class SquirrelAI : MonoBehaviour
                 Vector2 treeLoc = localTree.transform.position;
                 transform.position = Vector2.MoveTowards(transform.position, treeLoc, Time.deltaTime * speed);
 
-                if (Vector2.Distance(transform.position, treeLoc) == 0)
-                {
+                if(Vector2.Distance(transform.position, treeLoc) == 0) {
                     GameObject.FindGameObjectWithTag("Dog").GetComponent<DogPriorities>().removeObject(gameObject);
                     timer.Start();
                     state = SquirrelState.HIDE;
                 }
                 break;
             case SquirrelState.HIDE:
-                if (timer.ElapsedMilliseconds > (hideForSeconds * 1000))
-                {
+                if(timer.ElapsedMilliseconds > (hideForSeconds * 1000)) {
                     state = SquirrelState.WANDER;
                     timer.Stop();
                     timer.Reset();
@@ -85,23 +79,20 @@ public class SquirrelAI : MonoBehaviour
             default:
                 UnityEngine.Debug.LogError("Squirrel state invalid: " + state);
                 break;
+            }
         }
     }
 
-    void wander()
-    {
-        if (wandering)
-        {
+    void wander() {
+        if(wandering) {
             transform.position = new Vector3(transform.position.x + (wanderDirection.x * speed * 0.5f * Time.deltaTime), transform.position.y + (wanderDirection.y * speed * 0.5f * Time.deltaTime), 0);
             wanderCounter--;
 
-            if (wanderCounter <= 0)
-            {
+            if(wanderCounter <= 0) {
                 wandering = false;
             }
         }
-        else
-        {
+        else {
             float angle = UnityEngine.Random.Range(0, 359);
             wanderDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
             wanderCounter = UnityEngine.Random.Range(45, 125);
@@ -109,19 +100,16 @@ public class SquirrelAI : MonoBehaviour
         }
     }
 
-    public GameObject FindNearestByTag(string tag)
-    {
+    public GameObject FindNearestByTag(string tag) {
         GameObject[] gos;
         gos = GameObject.FindGameObjectsWithTag(tag);
         GameObject closest = null;
         float distance = Mathf.Infinity;
         Vector3 position = transform.position;
-        foreach (GameObject go in gos)
-        {
+        foreach(GameObject go in gos) {
             Vector3 diff = go.transform.position - position;
             float curDistance = diff.sqrMagnitude;
-            if (curDistance < distance)
-            {
+            if(curDistance < distance) {
                 closest = go;
                 distance = curDistance;
             }

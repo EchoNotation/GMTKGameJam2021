@@ -26,7 +26,7 @@ public class ThrowTreat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0) && timer.ElapsedMilliseconds - lastTime >= treatRateOfFire) {
+        if(Input.GetMouseButtonDown(0) && timer.ElapsedMilliseconds - lastTime >= treatRateOfFire && !GameObject.Find("CameraCart").GetComponent<CameraController>().currentlyInTransition()) {
             //Attempt to throw treat.
             lastTime = timer.ElapsedMilliseconds;
 

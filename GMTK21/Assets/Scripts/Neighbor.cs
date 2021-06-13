@@ -35,31 +35,33 @@ public class Neighbor : MonoBehaviour {
 
     // Update is called once per frame
     void FixedUpdate() {
-        Vector2 dogLoc = GameObject.FindGameObjectWithTag("Dog").transform.position;
+        if(!GameObject.Find("CameraCart").GetComponent<CameraController>().currentlyInTransition()) {
+            Vector2 dogLoc = GameObject.FindGameObjectWithTag("Dog").transform.position;
 
-        if(state == NeighborState.HAS_NOT_PET_DOG && Vector2.Distance(transform.position, dogLoc) <= petRange) {
-            //Move towards the dog-- Check to see if the dog is wet?
-            Vector2 newLoc = Vector2.MoveTowards(transform.position, dogLoc, Time.deltaTime * speed);
-            transform.position = new Vector3(newLoc.x, newLoc.y, 0);
-        }
-        else if(state == NeighborState.HAS_NOT_PET_DOG) {
-            wander();
-        }
-        else if(state == NeighborState.HAS_PET_DOG) {
-            //Return to origin? Wander?
-            /*Vector2 newLoc = Vector2.MoveTowards(transform.position, origin, Time.deltaTime * speed * 0.5f);
-            transform.position = new Vector3(newLoc.x, newLoc.y, 0);*/
-            wander();
-        }
-        else {
-            //Neighbor is currently petting dog... Need to track to ensure neighbor remains next to dog?
-            //Notify dog that it is being pet so it stops moving?
-            if(timer.ElapsedMilliseconds >= petDuration) {
-                //Done petting dog.
-                state = NeighborState.HAS_PET_DOG;
-                timer.Stop();
-                GameObject.FindGameObjectWithTag("Dog").GetComponent<DogPriorities>().setIsBeingPet(false);
-                GameObject.FindGameObjectWithTag("Dog").GetComponent<DogPriorities>().removeObject(gameObject);
+            if(state == NeighborState.HAS_NOT_PET_DOG && Vector2.Distance(transform.position, dogLoc) <= petRange) {
+                //Move towards the dog-- Check to see if the dog is wet?
+                Vector2 newLoc = Vector2.MoveTowards(transform.position, dogLoc, Time.deltaTime * speed);
+                transform.position = new Vector3(newLoc.x, newLoc.y, 0);
+            }
+            else if(state == NeighborState.HAS_NOT_PET_DOG) {
+                wander();
+            }
+            else if(state == NeighborState.HAS_PET_DOG) {
+                //Return to origin? Wander?
+                /*Vector2 newLoc = Vector2.MoveTowards(transform.position, origin, Time.deltaTime * speed * 0.5f);
+                transform.position = new Vector3(newLoc.x, newLoc.y, 0);*/
+                wander();
+            }
+            else {
+                //Neighbor is currently petting dog... Need to track to ensure neighbor remains next to dog?
+                //Notify dog that it is being pet so it stops moving?
+                if(timer.ElapsedMilliseconds >= petDuration) {
+                    //Done petting dog.
+                    state = NeighborState.HAS_PET_DOG;
+                    timer.Stop();
+                    GameObject.FindGameObjectWithTag("Dog").GetComponent<DogPriorities>().setIsBeingPet(false);
+                    GameObject.FindGameObjectWithTag("Dog").GetComponent<DogPriorities>().removeObject(gameObject);
+                }
             }
         }
     }
