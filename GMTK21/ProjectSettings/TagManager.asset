@@ -11,6 +11,7 @@ TagManager:
   - Neighbor
   - Squirrel
   - Tree
+  - SceneLoader
   layers:
   - Default
   - TransparentFX
