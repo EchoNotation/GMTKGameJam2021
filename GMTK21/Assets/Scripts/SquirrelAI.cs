@@ -12,8 +12,8 @@ public class SquirrelAI : MonoBehaviour {
         HIDE,
     }
 
-    public float buffer = 3;
-    public float dangerRange = 3;
+    public float buffer = 5;
+    public float dangerRange = 2;
     public float hideForSeconds = 8;
     private Vector2 origin;
     private SquirrelState state;
@@ -52,7 +52,8 @@ public class SquirrelAI : MonoBehaviour {
                 break;
             case SquirrelState.RUN:
                 transform.position = Vector2.MoveTowards(transform.position, dogLoc, Time.deltaTime * -speed);
-                if(dist > (dangerRange + buffer)) {
+                transform.up = (Vector2)transform.position - dogLoc;
+                if (dist > (dangerRange + buffer)) {
                     state = SquirrelState.RETREAT;
                     localTree = FindNearestByTag("Tree");
                     goto case SquirrelState.RETREAT;
@@ -61,6 +62,7 @@ public class SquirrelAI : MonoBehaviour {
             case SquirrelState.RETREAT:
                 Vector2 treeLoc = localTree.transform.position;
                 transform.position = Vector2.MoveTowards(transform.position, treeLoc, Time.deltaTime * speed);
+                transform.up = treeLoc - (Vector2) transform.position;
                 if (dist < (dangerRange + buffer)) {
                     state = SquirrelState.RUN;
                 }
@@ -88,6 +90,7 @@ public class SquirrelAI : MonoBehaviour {
     void wander() {
         if(wandering) {
             transform.position = new Vector3(transform.position.x + (wanderDirection.x * speed * 0.25f * Time.deltaTime), transform.position.y + (wanderDirection.y * speed * 0.5f * Time.deltaTime), 0);
+            transform.up = wanderDirection;
             wanderCounter--;
 
             if(wanderCounter <= 0) {

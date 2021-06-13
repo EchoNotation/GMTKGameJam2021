@@ -77,7 +77,7 @@ public class PlayerMotion : MonoBehaviour
     }
 
     public void setSpeed(float speedPercent) {
-        speed = (maxSpeed/4) + speedPercent * 3 * (maxSpeed / 4);//speedPercent should be between 0 and 1
+        speed = (maxSpeed/2) + speedPercent * (maxSpeed / 2);//speedPercent should be between 0 and 1
     }
 
 
