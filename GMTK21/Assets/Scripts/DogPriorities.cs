@@ -7,7 +7,7 @@ using UnityEngine.Windows.Speech;
 public class DogPriorities : MonoBehaviour {
     private List<GameObject> objects = new List<GameObject>();
     private Vector2 previousLoc;
-    private float distanceMod = 0.2f;
+    private float distanceMod = 1f;
     private Hashtable basePriorities;
     private bool isBeingPet;
 
@@ -15,9 +15,9 @@ public class DogPriorities : MonoBehaviour {
     void Start() {
         basePriorities = new Hashtable();
         isBeingPet = false;
-        basePriorities.Add("Treat", 5f);
+        basePriorities.Add("Treat", 3f);
         basePriorities.Add("Neighbor", 2f);
-        basePriorities.Add("Squirrel", 5.5f);
+        basePriorities.Add("Squirrel", 7f);
         basePriorities.Add("Goal", 0.5f);
 
         objects.Add(GameObject.FindGameObjectWithTag("Goal"));
@@ -57,12 +57,12 @@ public class DogPriorities : MonoBehaviour {
             string tag = temp[i].tag;
 
             if(tag == "Squirrel" || tag == "Neighbor") {
-                if(dist > 9) {
+                if(dist > 13) {
                     continue;
                 }
             }
 
-            float priority = ((1 / Mathf.Pow(dist, 2)) * distanceMod) + (float) basePriorities[tag];
+            float priority = ((1 / Mathf.Pow(dist, 2)) * distanceMod) * (float) basePriorities[tag];
             //Debug.Log("Tag: " + tag + " Priority: " + priority);
 
             if(maxIndex == -1) {
