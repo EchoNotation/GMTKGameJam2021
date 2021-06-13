@@ -12,7 +12,7 @@ public class SquirrelAI : MonoBehaviour {
         HIDE,
     }
 
-    public float buffer = 5;
+    public float buffer = 8;
     public float dangerRange = 2;
     public float hideForSeconds = 8;
     private Vector2 origin;
