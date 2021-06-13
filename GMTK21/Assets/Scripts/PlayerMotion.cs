@@ -8,10 +8,10 @@ public class PlayerMotion : MonoBehaviour
     public GameObject person;
     public GameObject leash;
     public Vector2 target = new Vector2();
-    public float maxSpeed = 10f;
+    private float maxSpeed = 10f;
     private float speed = 5f;
-    public float pullSpeed = 5f;
-    public float leashLen = 2f;
+    private float pullSpeed = 3f;
+    private float leashLen = 2f;
     private int count = 0;
 
     //sprites
@@ -19,6 +19,10 @@ public class PlayerMotion : MonoBehaviour
     public Sprite walk2;
     public Sprite walk3;
     public Sprite hold;
+    public Sprite wag1;
+    public Sprite wag2;
+    public Sprite wag3;
+    public Sprite wag4;
 
     // Start is called before the first frame update
     void Start()
@@ -54,8 +58,33 @@ public class PlayerMotion : MonoBehaviour
                     person.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = walk2;
                 }
             }
+            if (count % 6 == 0)
+            {
+                dog.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = wag1;
+            }
+            else if (count % 6 == 1)
+            {
+                dog.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = wag2;
+            }
+            else if (count % 6 == 2)
+            {
+                dog.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = wag3;
+            }
+            else if (count % 6 == 3)
+            {
+                dog.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = wag4;
+            }
+            else if (count % 6 == 4)
+            {
+                dog.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = wag3;
+            }
+            else
+            {
+                dog.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = wag2;
+            }
             count++;
             dogPos = transform.position;
+            dog.transform.GetChild(0).up = target - dogPos;
 
             //manage person
             float distance = Vector2.Distance(dogPos, personPos);
@@ -77,6 +106,13 @@ public class PlayerMotion : MonoBehaviour
     }
 
     public void setSpeed(float speedPercent) {
+        if (speedPercent < 0)
+        {
+            speedPercent = 0;
+        }
+        else if (speedPercent > 1) {
+            speedPercent = 1;
+        }
         speed = (maxSpeed/2) + speedPercent * (maxSpeed / 2);//speedPercent should be between 0 and 1
     }
 
