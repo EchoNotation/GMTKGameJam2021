@@ -9,7 +9,7 @@ using UnityEngine.SocialPlatforms;
 
 public class ThrowTreat : MonoBehaviour
 {
-    private double throwRange = 7;
+    private double throwRange = 5;
     private Stopwatch timer;
     private long lastTime;
     private long treatRateOfFire = 250;
