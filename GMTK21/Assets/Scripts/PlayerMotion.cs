@@ -29,7 +29,11 @@ public class PlayerMotion : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(!GameObject.Find("CameraCart").GetComponent<CameraController>().currentlyInTransition()) {
+        Vector2 dogPos = transform.position;
+        Vector2 personPos = person.transform.position;
+        Vector2 leashPos = leash.transform.position;
+
+        if (!GameObject.Find("CameraCart").GetComponent<CameraController>().currentlyInTransition()) {
             if(Input.GetKey("space") && GetComponent<DogTriggers>().isGameTime) {
                 //Debug.Log("space");
                 transform.position = Vector2.MoveTowards(transform.position, target, Mathf.Max(0, (speed - pullSpeed)) * Time.deltaTime);
@@ -51,18 +55,20 @@ public class PlayerMotion : MonoBehaviour
                 }
             }
             count++;
+            dogPos = transform.position;
 
             //manage person
-            float distance = Vector2.Distance(transform.position, person.transform.position);
+            float distance = Vector2.Distance(dogPos, personPos);
             if(distance >= leashLen) {
-                person.transform.position = Vector2.MoveTowards(person.transform.position, transform.position, distance * Time.deltaTime * 5);
+                person.transform.position = Vector2.MoveTowards(personPos, dogPos, distance * Time.deltaTime * 5);
             }
             person.transform.GetChild(0).up = dog.transform.position - person.transform.position;
+            personPos = person.transform.position;
 
             //manage leash
-            leash.transform.position = (dog.transform.position + person.transform.position) / 2;
-            leash.transform.right = dog.transform.position - leash.transform.position;
-            leash.transform.localScale = new Vector3(Vector2.Distance(dog.transform.position, person.transform.position), 0.2f, 0);
+            leash.transform.position = ((dogPos + personPos)  + (dogPos - personPos).normalized) / 2;
+            leash.transform.right = dogPos - leashPos;
+            leash.transform.localScale = new Vector3(Vector2.Distance(dog.transform.position, person.transform.position), 0.1f, 0);
         }
     }
 
@@ -71,7 +77,7 @@ public class PlayerMotion : MonoBehaviour
     }
 
     public void setSpeed(float speedPercent) {
-        speed = speedPercent * maxSpeed;//speedPercent should be between 0 and 1
+        speed = (maxSpeed/4) + speedPercent * 3 * (maxSpeed / 4);//speedPercent should be between 0 and 1
     }
 
 

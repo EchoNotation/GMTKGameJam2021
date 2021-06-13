@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4647346628117610881}
   m_Layer: 0
   m_Name: Squirrel
-  m_TagString: Untagged
+  m_TagString: Squirrel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,3 +98,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buffer: 3
   dangerRange: 10
+  hideForSeconds: 4
