@@ -47,6 +47,9 @@ TextureImporter:
   - first:
       213: 4188234848031889320
     second: Street_14
+  - first:
+      213: 5813361944732930542
+    second: Street_15
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -217,7 +220,7 @@ TextureImporter:
       name: Street_2
       rect:
         serializedVersion: 2
-        x: 96
+        x: 64
         y: 96
         width: 32
         height: 32
@@ -238,8 +241,8 @@ TextureImporter:
       name: Street_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 64
+        x: 96
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -259,7 +262,7 @@ TextureImporter:
       name: Street_4
       rect:
         serializedVersion: 2
-        x: 32
+        x: 0
         y: 64
         width: 32
         height: 32
@@ -280,7 +283,7 @@ TextureImporter:
       name: Street_5
       rect:
         serializedVersion: 2
-        x: 64
+        x: 32
         y: 64
         width: 32
         height: 32
@@ -301,7 +304,7 @@ TextureImporter:
       name: Street_6
       rect:
         serializedVersion: 2
-        x: 96
+        x: 64
         y: 64
         width: 32
         height: 32
@@ -322,8 +325,8 @@ TextureImporter:
       name: Street_7
       rect:
         serializedVersion: 2
-        x: 0
-        y: 32
+        x: 96
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -343,7 +346,7 @@ TextureImporter:
       name: Street_8
       rect:
         serializedVersion: 2
-        x: 32
+        x: 0
         y: 32
         width: 32
         height: 32
@@ -364,7 +367,7 @@ TextureImporter:
       name: Street_9
       rect:
         serializedVersion: 2
-        x: 64
+        x: 32
         y: 32
         width: 32
         height: 32
@@ -385,7 +388,7 @@ TextureImporter:
       name: Street_10
       rect:
         serializedVersion: 2
-        x: 96
+        x: 64
         y: 32
         width: 32
         height: 32
@@ -406,8 +409,8 @@ TextureImporter:
       name: Street_11
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 96
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -427,7 +430,7 @@ TextureImporter:
       name: Street_12
       rect:
         serializedVersion: 2
-        x: 32
+        x: 0
         y: 0
         width: 32
         height: 32
@@ -448,7 +451,7 @@ TextureImporter:
       name: Street_13
       rect:
         serializedVersion: 2
-        x: 64
+        x: 32
         y: 0
         width: 32
         height: 32
@@ -469,7 +472,7 @@ TextureImporter:
       name: Street_14
       rect:
         serializedVersion: 2
-        x: 96
+        x: 64
         y: 0
         width: 32
         height: 32
@@ -482,6 +485,27 @@ TextureImporter:
       bones: []
       spriteID: 8a75ad077699f1a30800000000000000
       internalID: 4188234848031889320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Street_15
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee1949263e53da050800000000000000
+      internalID: 5813361944732930542
       vertices: []
       indices: 
       edges: []
