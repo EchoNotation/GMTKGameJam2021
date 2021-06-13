@@ -61,7 +61,7 @@ public class CameraController : MonoBehaviour {
         state = TransitionState.NOT_IN_TRANSITION;
 
         //Comment this line out if/when the transition on boot becomes annoying.
-        //state = TransitionState.WAIT_TO_FOCUS_ON_HOUSE;
+        state = TransitionState.WAIT_TO_FOCUS_ON_HOUSE;
     }
 
     // Update is called once per frame
@@ -156,5 +156,9 @@ public class CameraController : MonoBehaviour {
 
     public bool currentlyInTransition() {
         return inTransition;
+    }
+
+    public void setInTransition() {
+        inTransition = true;
     }
 }

@@ -17,7 +17,7 @@ public class DogPriorities : MonoBehaviour {
         isBeingPet = false;
         basePriorities.Add("Treat", 5f);
         basePriorities.Add("Neighbor", 2f);
-        basePriorities.Add("Squirrel", 7f);
+        basePriorities.Add("Squirrel", 5.5f);
         basePriorities.Add("Goal", 0.5f);
 
         objects.Add(GameObject.FindGameObjectWithTag("Goal"));
@@ -55,6 +55,13 @@ public class DogPriorities : MonoBehaviour {
             }
 
             string tag = temp[i].tag;
+
+            if(tag == "Squirrel" || tag == "Neighbor") {
+                if(dist > 9) {
+                    continue;
+                }
+            }
+
             float priority = ((1 / Mathf.Pow(dist, 2)) * distanceMod) + (float) basePriorities[tag];
             //Debug.Log("Tag: " + tag + " Priority: " + priority);
 

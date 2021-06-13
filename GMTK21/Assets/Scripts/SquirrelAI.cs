@@ -14,7 +14,7 @@ public class SquirrelAI : MonoBehaviour {
 
     public float buffer = 3;
     public float dangerRange = 4;
-    public float hideForSeconds = 4;
+    public float hideForSeconds = 8;
     private Vector2 origin;
     private SquirrelState state;
     private float speed = 13;

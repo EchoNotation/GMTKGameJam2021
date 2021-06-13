@@ -22,6 +22,8 @@ public class DogTriggers : MonoBehaviour {
             //Level complete!
             Debug.Log("Level complete!");
             isGameTime = false;
+            GameObject.Find("CameraCart").GetComponent<CameraController>().setInTransition();
+            //Enable level complete message
         }
         else if(collider.CompareTag("Neighbor")) {
             collider.GetComponent<Neighbor>().beginPettingDog();
