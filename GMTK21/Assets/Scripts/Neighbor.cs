@@ -42,6 +42,7 @@ public class Neighbor : MonoBehaviour {
                 //Move towards the dog-- Check to see if the dog is wet?
                 Vector2 newLoc = Vector2.MoveTowards(transform.position, dogLoc, Time.deltaTime * speed);
                 transform.position = new Vector3(newLoc.x, newLoc.y, 0);
+                transform.up = newLoc - (Vector2) transform.position;
             }
             else if(state == NeighborState.HAS_NOT_PET_DOG) {
                 wander();
@@ -70,8 +71,9 @@ public class Neighbor : MonoBehaviour {
         if(wandering) {
             transform.position = new Vector3(transform.position.x + (wanderDirection.x * speed * 0.5f * Time.deltaTime), transform.position.y + (wanderDirection.y * speed * 0.5f * Time.deltaTime), 0);
             wanderCounter--;
+            transform.up = wanderDirection;
 
-            if(wanderCounter <= 0) {
+            if (wanderCounter <= 0) {
                 wandering = false;
             }
         }
