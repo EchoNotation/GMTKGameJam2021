@@ -10,6 +10,7 @@ public class DogTriggers : MonoBehaviour {
     public GameObject panel;
     private RectTransform mercury;
     public bool isGameTime = false;
+    public GameObject endScreen;
 
     private void Start() {
         timeRemaining = levelTimeSec;
@@ -23,6 +24,7 @@ public class DogTriggers : MonoBehaviour {
             Debug.Log("Level complete!");
             isGameTime = false;
             GameObject.Find("CameraCart").GetComponent<CameraController>().setInTransition();
+            endScreen.SetActive(true);
             //Enable level complete message
         }
         else if(collider.CompareTag("Neighbor")) {
