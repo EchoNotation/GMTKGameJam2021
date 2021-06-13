@@ -15,18 +15,22 @@ public class ThrowTreat : MonoBehaviour
     private long treatRateOfFire = 250;
     public Camera cam;
     public GameObject treat;
+    private GameObject dog;
+    private GameObject cameracart;
 
     // Start is called before the first frame update
     void Start()
     {
         timer = new Stopwatch();
         timer.Start();
+        cameracart = GameObject.Find("CameraCart");
+        dog = GameObject.FindGameObjectWithTag("Dog");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0) && timer.ElapsedMilliseconds - lastTime >= treatRateOfFire && !GameObject.Find("CameraCart").GetComponent<CameraController>().currentlyInTransition()) {
+        if(Input.GetMouseButtonDown(0) && timer.ElapsedMilliseconds - lastTime >= treatRateOfFire && !cameracart.GetComponent<CameraController>().currentlyInTransition() && dog.GetComponent<DogTriggers>().isGameTime) {
             //Attempt to throw treat.
             lastTime = timer.ElapsedMilliseconds;
 

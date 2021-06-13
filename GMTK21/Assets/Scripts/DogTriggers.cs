@@ -41,6 +41,8 @@ public class DogTriggers : MonoBehaviour {
         if(!GameObject.Find("CameraCart").GetComponent<CameraController>().currentlyInTransition()) {
             if(timeRemaining <= 0) {
                 isGameTime = false;
+                endScreen.GetComponentInChildren<Text>().text = "You lose! The chicken has burned!";
+                endScreen.SetActive(true);
                 //you lose
             }
             if(isGameTime) {
